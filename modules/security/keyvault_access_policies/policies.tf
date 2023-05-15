@@ -34,10 +34,7 @@ module "azuread_service_principals" {
   access_policy = each.value
   tenant_id     = var.resources.azuread_service_principals[try(each.value.lz_key, var.client_config.landingzone_key)][each.value.azuread_service_principal_key].tenant_id
 
-  object_id = coalesce(
-    try(var.resources.azuread_service_principals[each.value.lz_key][each.value.azuread_service_principal_key].object_id, null),
-    try(var.resources.azuread_service_principals[var.client_config.landingzone_key][each.value.azuread_service_principal_key].object_id, null)
-  )
+  object_id = var.client_config.object_id
 }
 
 module "azuread_group" {
@@ -56,7 +53,7 @@ module "azuread_group" {
 
   access_policy = each.value
   tenant_id     = var.client_config.tenant_id
-  object_id     = try(each.value.lz_key, null) == null ? var.azuread_groups[var.client_config.landingzone_key][each.value.azuread_group_key].id : var.azuread_groups[each.value.lz_key][each.value.azuread_group_key].id
+  object_id     = var.client_config.object_id
 }
 
 module "logged_in_user" {
@@ -133,10 +130,7 @@ module "managed_identity" {
   access_policy = each.value
   tenant_id     = var.client_config.tenant_id
 
-  object_id = coalesce(
-    try(var.resources.managed_identities[each.value.lz_key][each.value.managed_identity_key].principal_id, null),
-    try(var.resources.managed_identities[var.client_config.landingzone_key][each.value.managed_identity_key].principal_id, null)
-  )
+  object_id = var.client_config.object_id
 }
 
 module "mssql_managed_instance" {
@@ -155,7 +149,7 @@ module "mssql_managed_instance" {
 
   access_policy = each.value
   tenant_id     = var.client_config.tenant_id
-  object_id     = try(each.value.lz_key, null) == null ? var.resources.mssql_managed_instances[var.client_config.landingzone_key][each.value.mssql_managed_instance_key].principal_id : var.resources.mssql_managed_instances[each.value.lz_key][each.value.mssql_managed_instance_key].principal_id
+  object_id     = var.client_config.object_id
 }
 
 module "mssql_managed_instances_secondary" {
@@ -174,7 +168,7 @@ module "mssql_managed_instances_secondary" {
 
   access_policy = each.value
   tenant_id     = var.client_config.tenant_id
-  object_id     = try(each.value.lz_key, null) == null ? var.resources.mssql_managed_instances_secondary[var.client_config.landingzone_key][each.value.mssql_managed_instance_secondary_key].principal_id : var.resources.mssql_managed_instances_secondary[each.value.lz_key][each.value.mssql_managed_instance_secondary_key].principal_id
+  object_id     = var.client_config.object_id
 }
 
 
