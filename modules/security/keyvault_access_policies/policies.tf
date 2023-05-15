@@ -14,7 +14,7 @@ module "azuread_apps" {
 
   access_policy = each.value
   tenant_id     = var.client_config.tenant_id
-  object_id = [var.client_config.object_id]
+  object_id = var.client_config.object_id
 }
 
 module "azuread_service_principals" {
