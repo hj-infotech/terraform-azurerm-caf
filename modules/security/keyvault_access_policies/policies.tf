@@ -1,4 +1,3 @@
-
 module "azuread_apps" {
   source = "./access_policy"
   for_each = {
@@ -15,11 +14,7 @@ module "azuread_apps" {
 
   access_policy = each.value
   tenant_id     = var.client_config.tenant_id
-  object_id = coalesce(
-    try(var.azuread_apps[each.value.lz_key][each.value.azuread_app_key].azuread_service_principal.object_id, null),
-    try(var.azuread_apps[each.value.azuread_app_lz_key][each.value.azuread_app_key].azuread_service_principal.object_id, null),
-    try(var.azuread_apps[var.client_config.landingzone_key][each.value.azuread_app_key].azuread_service_principal.object_id, null)
-  )
+  object_id = [var.client_config.object_id]
 }
 
 module "azuread_service_principals" {
