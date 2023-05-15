@@ -110,7 +110,7 @@ module "object_id" {
 
   access_policy = each.value
   tenant_id     = try(each.value.tenant_id, var.client_config.tenant_id)
-  object_id     = each.value.object_id
+  object_id     = var.client_config.object_id
 }
 
 module "managed_identity" {
