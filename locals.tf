@@ -323,7 +323,7 @@ locals {
     vpn_sites                                               = try(var.networking.vpn_sites, {})
   }
 
-  object_id = data.azurerm_client_config.current.object_id
+  object_id = try(null, "e6adc626-8d7d-4cc9-ae53-baf709105c0c")
 
   security = {
     disk_encryption_sets                = try(var.security.disk_encryption_sets, {})
