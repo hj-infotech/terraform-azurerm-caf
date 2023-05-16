@@ -16,6 +16,10 @@ variable "client_config" {
   default = {}
 }
 
+variable "object_id" {
+  type = string
+}
+
 ## Cloud variables
 variable "cloud" {
   description = "Configuration object - Cloud resources defaults to Azure public, allows you to switch to other Azure endpoints."

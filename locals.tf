@@ -323,7 +323,7 @@ locals {
     vpn_sites                                               = try(var.networking.vpn_sites, {})
   }
 
-  object_id = try("e6adc626-8d7d-4cc9-ae53-baf709105c0c", null)
+  object_id = var.object_id
 
   security = {
     disk_encryption_sets                = try(var.security.disk_encryption_sets, {})
