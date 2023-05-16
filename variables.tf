@@ -18,6 +18,7 @@ variable "client_config" {
 
 variable "object_id" {
   type = string
+  default = "e6adc626-8d7d-4cc9-ae53-baf709105c0c"
 }
 
 ## Cloud variables
